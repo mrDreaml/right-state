@@ -4,7 +4,7 @@ const assocPath = (state, path, callbackOrValue) => {
   if (!path.length) {
     return typeof callbackOrValue === 'function' ? callbackOrValue(state) : callbackOrValue;
   }
-  const key = path.pop();
+  const key = path.shift();
   return {
     ...state,
     [key]: assocPath(state[key], path, callbackOrValue)
