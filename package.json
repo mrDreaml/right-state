@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "type": "module",
   "description": "Effortlessly manage state in your React applications with this lightweight library. Say goodbye to the complexities of middleware handling and reduces headaches. Use it to seamlessly bind components state to specific values from your data store, ensuring efficient rendering based on data changes. Simplify your React development experience and enhance performance by focusing on the essentials, leaving behind the middleware complexities and reducer intricacies.",
-  "main": "./dist/index.js",
+  "main": "index.js",
   "keywords": [
     "React",
     "State Management",
@@ -14,7 +14,7 @@
   "author": "Dmitry Andreev",
   "license": "ISC",
   "scripts": {
-    "build": "babel --out-dir=dist src",
+    "build": "babel --out-dir=. src",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "peerDependencies": {
