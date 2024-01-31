@@ -1,14 +1,14 @@
-# React Simple State
+# right-store
 
 ```
 Effortlessly manage state in your React applications with this lightweight library. Say goodbye to the complexities of middleware handling and reduces headaches. Use it to seamlessly bind components state to specific values from your data store, ensuring efficient rendering based on data changes. Simplify your React development experience and enhance performance by focusing on the essentials, leaving behind the middleware complexities and reducer intricacies.
 ```
 
 ### How to import:
-`import { StateProvider } from 'react-simple-state';`
+`import { StateProvider } from 'right-store';`
 
 ### First step:
-wrap you App in `<StateProvider />`:
+wrap your App in `<StateProvider />`:
 ```
     <StateProvider initialState={{ count: 0 }}>
         <App />
@@ -17,7 +17,7 @@ wrap you App in `<StateProvider />`:
 
 ### Counter Example:
 ```
-    import { usePatchState, useWatchState } from 'react-simple-state';
+    import { usePatchState, useWatchState } from 'right-store';
 
     const Counter = () => {
     const count = useWatchState(state => state.count)
@@ -31,7 +31,7 @@ wrap you App in `<StateProvider />`:
 
 ### `<StateProvider />`
 props: `initialState: Object`, `children`  
-description: Wrap your App to allow using `react-simple-state` hooks
+description: Wrap your App to allow using `right-store` hooks
 
 ### `useWatchState`
 props: `selector: Function`  
