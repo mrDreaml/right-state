@@ -1,8 +1,8 @@
 # right-store
 
-```
+<p>
 Effortlessly manage state in your React applications with this lightweight library. Say goodbye to the complexities of middleware handling and reduces headaches. Use it to seamlessly bind components state to specific values from your data store, ensuring efficient rendering based on data changes. Simplify your React development experience and enhance performance by focusing on the essentials, leaving behind the middleware complexities and reducer intricacies.
-```
+</p>
 
 ### How to import:
 `import { StateProvider } from 'right-store';`
