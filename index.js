@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+const EMPTY_ARRAY = [];
 const identity = v => v;
 const assocPath = (stateByPath, path, callbackOrValue, originalState = stateByPath) => {
   if (!path.length) {
@@ -11,16 +12,17 @@ const assocPath = (stateByPath, path, callbackOrValue, originalState = stateByPa
   };
 };
 const StateContext = /*#__PURE__*/createContext(null);
-export const useWatchState = (selector = identity) => {
+export const useWatchState = (selector = identity, deps = EMPTY_ARRAY) => {
   const store = useContext(StateContext);
   const [state, setState] = useState(() => selector(store.getState()));
   useEffect(() => {
+    setState(selector(store.getState()));
     const handler = () => {
       setState(selector(store.getState()));
     };
     store.subscribe(handler);
     return () => store.unsubscribe(handler);
-  }, [store, selector]);
+  }, deps);
   return state;
 };
 export const useGetState = () => {
