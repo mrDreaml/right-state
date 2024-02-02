@@ -2,12 +2,12 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useS
 
 const identity = v => v
 
-const assocPath = (state, path, callbackOrValue) => {
+const assocPath = (stateByPath, path, callbackOrValue, originalState = stateByPath) => {
     if (!path.length) {
-        return typeof callbackOrValue === 'function' ? callbackOrValue(state) : callbackOrValue
+        return typeof callbackOrValue === 'function' ? callbackOrValue(stateByPath, originalState) : callbackOrValue
     }
     const key = path.shift()
-    return { ...state, [key]: assocPath(state[key], path, callbackOrValue) }
+    return { ...stateByPath, [key]: assocPath(stateByPath[key], path, callbackOrValue, originalState) }
 }
 
 const StateContext = createContext(null)
@@ -18,16 +18,13 @@ export const useWatchState = (selector = identity) => {
 
     useEffect(() => {
         const handler = () => {
-            const newState = selector(store.getState())
-            if (newState !== state) {
-                setState(newState)
-            }
+            setState(selector(store.getState()))
         }
 
         store.subscribe(handler)
 
         return () => store.unsubscribe(handler)
-    }, [store, state, selector])
+    }, [store, selector])
 
     return state
 }
@@ -72,7 +69,7 @@ export const StateProvider = ({ initialState, children }) => {
         }
 
         return store
-    }, [initialState])
+    }, [])
 
     return (
         <StateContext.Provider value={store}>

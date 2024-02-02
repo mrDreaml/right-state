@@ -1,13 +1,13 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 const identity = v => v;
-const assocPath = (state, path, callbackOrValue) => {
+const assocPath = (stateByPath, path, callbackOrValue, originalState = stateByPath) => {
   if (!path.length) {
-    return typeof callbackOrValue === 'function' ? callbackOrValue(state) : callbackOrValue;
+    return typeof callbackOrValue === 'function' ? callbackOrValue(stateByPath, originalState) : callbackOrValue;
   }
   const key = path.shift();
   return {
-    ...state,
-    [key]: assocPath(state[key], path, callbackOrValue)
+    ...stateByPath,
+    [key]: assocPath(stateByPath[key], path, callbackOrValue, originalState)
   };
 };
 const StateContext = /*#__PURE__*/createContext(null);
@@ -16,14 +16,11 @@ export const useWatchState = (selector = identity) => {
   const [state, setState] = useState(() => selector(store.getState()));
   useEffect(() => {
     const handler = () => {
-      const newState = selector(store.getState());
-      if (newState !== state) {
-        setState(newState);
-      }
+      setState(selector(store.getState()));
     };
     store.subscribe(handler);
     return () => store.unsubscribe(handler);
-  }, [store, state, selector]);
+  }, [store, selector]);
   return state;
 };
 export const useGetState = () => {
@@ -67,7 +64,7 @@ export const StateProvider = ({
       subscriptions.forEach(callback => callback());
     };
     return store;
-  }, [initialState]);
+  }, []);
   return /*#__PURE__*/React.createElement(StateContext.Provider, {
     value: store
   }, children);
