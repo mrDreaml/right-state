@@ -1,11 +1,11 @@
 {
   "name": "right-store",
   "private": false,
-  "version": "1.1.0",
+  "version": "2.0.0",
   "type": "module",
   "homepage": "https://github.com/mrDreaml/right-store",
   "description": "Effortlessly manage state in your React applications with this lightweight library. Say goodbye to the complexities of middleware handling and reduces headaches. Use it to seamlessly bind components state to specific values from your data store, ensuring efficient rendering based on data changes. Simplify your React development experience and enhance performance by focusing on the essentials, leaving behind the middleware complexities and reducer intricacies.",
-  "main": "index.js",
+  "main": "index.ts",
   "keywords": [
     "React",
     "State Management",
@@ -18,7 +18,7 @@
   "author": "Dmitry Andreev",
   "license": "ISC",
   "scripts": {
-    "build": "babel --out-dir=. src",
+    "build": "babel --out-dir=.  --extensions \".ts,.tsx\" src/index.ts",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "peerDependencies": {
@@ -27,13 +27,19 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.23.9",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "typescript": "^5.7.2"
   }
 }
